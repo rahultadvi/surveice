@@ -58,14 +58,12 @@ function Signup() {
       setLoading(true);
 
       await axios.post(
-        "http://localhost:3000/auth/signup",
+        "https://surveice.onrender.com/auth/signup",
         form
       );
 
-      // ⚡ INSTANT REDIRECT (NO BLOCKING)
-      navigate("/verify-otp", {
-        state: { email: form.email }
-      });
+      // ⚡ DIRECT REDIRECT TO LOGIN (NO OTP FLOW)
+      navigate("/login");
 
     } catch (err) {
       setError(
@@ -127,7 +125,7 @@ function Signup() {
       </button>
 
       <p className="text-xs text-gray-500 text-center">
-        OTP will be sent to your email
+        You can login immediately after signup
       </p>
     </AuthLayout>
   );

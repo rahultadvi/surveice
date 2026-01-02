@@ -6,7 +6,6 @@ import cors from "cors";
 import connectDB from "./db/db.js";
 import authRout from "./router/authrouter.js";
 
-// dotenv sirf local ke liye
 if (process.env.NODE_ENV !== "production") {
   dotenv.config();
 }
@@ -21,16 +20,21 @@ app.use(express.json());
 app.use(cookieParser());
 
 app.use(
-  cors({
-    origin: true,
+  cors(
+    {
+    origin: [
+      "http://localhost:5173",
+      "https://surveice-frontend.onrender.com"
+    ],
     credentials: true,
-  })
+  }
+)
 );
 
 // routes
 app.use("/auth", authRout);
 
-// PORT (Render friendly)
+// PORT
 const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => {
