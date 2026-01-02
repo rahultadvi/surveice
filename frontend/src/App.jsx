@@ -17,7 +17,7 @@ import ProtectedRoute from "./components/ProtectedRoute.jsx";
 import Dashboard from "./page/dashboard/Dashboard.jsx";
 import Signup from "./page/auth/Signup.jsx";
 import Login from "./page/auth/Login.jsx";
-// import VerifyEmail from "./page/auth/VerifyEmail.jsx";
+import VerifyEmail from "./page/auth/VerifyEmail.jsx";
 import InviteRegister from "./page/auth/InviteRegister.jsx";
 import ExpenseList from "./page/expenses/ExpenseList.jsx";
 import AddExpense from "./page/expenses/AddExpense.jsx";
@@ -65,7 +65,7 @@ function AppLayout() {
             {/* Public */}
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<Signup />} />
-            
+            <Route path="/verify/:token" element={<VerifyEmail />} />
             <Route path="/invite/:token" element={<InviteRegister />} />
 
             {/* Protected */}

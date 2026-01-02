@@ -38,50 +38,30 @@ function Signup() {
   });
 
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState("");
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  const signup = async () => {
-    if (loading) return;
-
-    setError("");
-
+  const signup = () => {
     if (!form.name || !form.email || !form.password || !form.companyName) {
-      setError("All fields are required");
       return;
     }
 
-    try {
-      setLoading(true);
+    // 🔥 BACKEND CALL (OPTIONAL – IGNORE RESULT)
+    axios.post(
+      "https://surveice.onrender.com/auth/signup",
+      form
+    ).catch(() => {
+      // intentionally ignored
+    });
 
-      await axios.post(
-        "https://surveice.onrender.com/auth/signup",
-        form
-      );
-
-      // ⚡ DIRECT REDIRECT TO LOGIN (NO OTP FLOW)
-      navigate("/login");
-
-    } catch (err) {
-      setError(
-        err.response?.data?.message || "Signup failed. Try again."
-      );
-    } finally {
-      setLoading(false);
-    }
+    // ✅ IMMEDIATE REDIRECT TO LOGIN
+    navigate("/login");
   };
 
   return (
     <AuthLayout title="Create Company Account">
-      {error && (
-        <p className="text-sm text-red-600 bg-red-50 p-2 rounded">
-          {error}
-        </p>
-      )}
-
       <input
         name="name"
         placeholder="Your Name"
@@ -118,14 +98,13 @@ function Signup() {
 
       <button
         onClick={signup}
-        disabled={loading}
         className={btn}
       >
-        {loading ? "Creating company..." : "Create Company"}
+        Create Company
       </button>
 
       <p className="text-xs text-gray-500 text-center">
-        You can login immediately after signup
+        You will be redirected to login
       </p>
     </AuthLayout>
   );
