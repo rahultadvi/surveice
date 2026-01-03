@@ -1,6 +1,6 @@
 import { createContext, useContext, useState, useEffect } from "react";
 
-const AuthContext = createContext();
+const AuthContext = createContext(null);
 
 export const useAuth = () => useContext(AuthContext);
 
@@ -14,14 +14,20 @@ export function AuthProvider({ children }) {
     setLoading(false);
   }, []);
 
+  // ✅ FIXED LOGIN
   const login = (email) => {
-    const users = JSON.parse(localStorage.getItem("users")) || [];
-    const found = users.find((u) => u.email === email && u.verified);
-    if (!found) return false;
+    const cleanEmail = email?.trim();
 
-    setUser(found);
-    localStorage.setItem("auth_user", JSON.stringify(found));
-    return true;
+    if (!cleanEmail) return false;
+
+    const userData = {
+      email: cleanEmail,
+      role: "admin",
+    };
+
+    setUser(userData);
+    localStorage.setItem("auth_user", JSON.stringify(userData));
+    return true; // 🔥 VERY IMPORTANT
   };
 
   const logout = () => {

@@ -26,10 +26,12 @@ function Login() {
 
   const submit = () => {
     const success = login(email);
+
     if (!success) {
-      alert("Invalid user or email not verified");
+      alert("Please enter email");
       return;
     }
+
     navigate("/dashboard");
   };
 
@@ -40,22 +42,14 @@ function Login() {
         placeholder="Email address"
         value={email}
         onChange={(e) => setEmail(e.target.value)}
-        className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+        className="w-full border px-3 py-2"
       />
 
-      <button
-        onClick={submit}
-        className="w-full bg-blue-600 text-white py-2.5 rounded-lg text-sm font-medium hover:bg-blue-700 transition"
-      >
+      <button onClick={submit} className="w-full bg-blue-600 text-white py-2">
         Login
       </button>
 
-      <Link
-        to="/signup"
-        className="block text-center text-sm text-blue-600 hover:underline"
-      >
-        Create Admin Account
-      </Link>
+      <Link to="/signup">Create Admin Account</Link>
     </AuthLayout>
   );
 }

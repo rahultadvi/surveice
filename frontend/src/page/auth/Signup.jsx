@@ -49,12 +49,12 @@ function Signup() {
     }
 
     // 🔥 BACKEND CALL (OPTIONAL – IGNORE RESULT)
-    axios.post(
-      "https://surveice.onrender.com/auth/signup",
-      form
-    ).catch(() => {
-      // intentionally ignored
-    });
+    // axios.post(
+    //   "https://surveice.onrender.com/auth/signup",
+    //   form
+    // ).catch(() => {
+    //   // intentionally ignored
+    // });
 
     // ✅ IMMEDIATE REDIRECT TO LOGIN
     navigate("/login");

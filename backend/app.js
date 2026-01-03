@@ -19,11 +19,12 @@ connectDB();
 app.use(express.json());
 app.use(cookieParser());
 
+// ✅ CORS (THIS IS ENOUGH)
 app.use(
   cors({
     origin: [
       "http://localhost:5173",
-      "https://surveice.onrender.com",          // frontend domain
+      "https://surveice.onrender.com",
     ],
     credentials: true,
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
@@ -31,8 +32,6 @@ app.use(
   })
 );
 
-// VERY IMPORTANT: handle preflight
-app.options("*", cors());
 // routes
 app.use("/auth", authRout);
 
