@@ -32,7 +32,7 @@ function InviteRegister() {
     const newUser = {
       id: Date.now(),
       email,
-      role: invite.role,        // manager / agent
+      role: invite.role,        
       companyId: invite.companyId,
       verified: true,
     };
@@ -40,7 +40,7 @@ function InviteRegister() {
     users.push(newUser);
     localStorage.setItem("users", JSON.stringify(users));
 
-    // remove used invite
+   
     const remainingInvites = invites.filter((i) => i.token !== token);
     localStorage.setItem("invites", JSON.stringify(remainingInvites));
 

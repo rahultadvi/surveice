@@ -20,17 +20,19 @@ app.use(express.json());
 app.use(cookieParser());
 
 app.use(
-  cors(
-    {
+  cors({
     origin: [
       "http://localhost:5173",
-      "https://surveice-frontend.onrender.com"
+      "https://surveice.onrender.com",          // frontend domain
     ],
     credentials: true,
-  }
-)
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+  })
 );
 
+// VERY IMPORTANT: handle preflight
+app.options("*", cors());
 // routes
 app.use("/auth", authRout);
 
